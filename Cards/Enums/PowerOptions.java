@@ -2,7 +2,8 @@ package Cards.Enums;
 
 public enum PowerOptions
 {
+    BASECARD,
     TAKETWO,
-    SWITCHLANGUAGE,
-    BLOCK
+    BLOCK,
+    SWITCHLANGUAGE
 }

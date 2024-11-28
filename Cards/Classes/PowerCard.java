@@ -5,7 +5,7 @@ import Cards.Enums.*;
 
 public class PowerCard extends Card
 {
-    protected String power;
+    protected PowerOptions power;
 
     public PowerCard(ProgrammingLanguage language, String url, PowerOptions power)
     {
@@ -20,7 +20,7 @@ public class PowerCard extends Card
         this.power = power;
     }
 
-    public String getPower()
+    public PowerOptions getPower()
     {
         return power;
     }
