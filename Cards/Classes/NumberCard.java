@@ -1,6 +1,5 @@
 package Cards.Classes;
 
-import Cards.Classes.Card;
 import Cards.Enums.ProgrammingLanguage;
 
 public class NumberCard extends Card

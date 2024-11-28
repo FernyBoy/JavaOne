@@ -1,6 +1,5 @@
 package Cards.Classes;
 
-import Cards.Classes.Card;
 import Cards.Enums.*;
 
 public class PowerCard extends Card
