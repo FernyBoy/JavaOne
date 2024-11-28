@@ -1,126 +1,84 @@
 package Cards.Classes;
 
+import Cards.Enums.*;
 import java.util.ArrayList;
 
-import Cards.Classes.*;
-import Cards.Enums.*;
-
-public class Deck
+public class Deck 
 {
-    // ----- Deck -----
     private ArrayList<ArrayList<ArrayList<Card>>> deck;
 
-    // ----------------------------------------------
-
-    // C++ cards
-    private ArrayList<ArrayList<Card>> cppDeck;
-    // --- C++ number cards
-    private ArrayList<NumberCard> cppNumberCards;
-    // --- C++ power cards
-    private ArrayList<PowerCard> cppPowerCards;
-
-    // ----------------------------------------------
-
-    // C# cards
-    private ArrayList<ArrayList<Card>> csharpDeck;
-    // --- C# number cards
-    private ArrayList<NumberCard> csharpNumberCards;
-    // --- C# power cards
-    private ArrayList<PowerCard> csharpPowerCards;
-
-    // ---------------------------------------------
-
-    // Java cards
-    private ArrayList<ArrayList<Card>> javaDeck;
-    // --- Java number cards
-    private ArrayList<NumberCard> javaNumberCards;
-    // --- Java power cards
-    private ArrayList<PowerCard> javaPowerCards;
-
-    // ---------------------------------------------
-
-    // Python cards
-    private ArrayList<ArrayList<Card>> pythonDeck;
-    // --- Python number cards
-    private ArrayList<NumberCard> pythonNumberCards;
-    // --- Python power cards
-    private ArrayList<PowerCard> pythonPowerCards;
-    
-    // ---------------------------------------------
-
-
-    public Deck()
+    public Deck() 
     {
         initializeDeck();
     }
 
-    private void initializeDeck()
+    private void initializeDeck() 
     {
-        // C++
-        // --- C++ number cards
-        for(int i = 0; i < 10; i++)
-        {
-            cppNumberCards.add(new NumberCard(ProgrammingLanguage.CPPLAN, "../Assets/cpp/numberCards/cpp_" + i + "_card.png", i));
-        }
-        // --- C++ power cards
-        // - C++ base card
-        cppPowerCards.add(new PowerCard(ProgrammingLanguage.CPPLAN, "../Assets/cpp/powerCards/cpp_base_card.png", PowerOptions.BASECARD));
-        // - C++ take two card
-        cppPowerCards.add(new PowerCard(ProgrammingLanguage.CPPLAN, "../Assets/cpp/powerCards/cpp_block_card.png", PowerOptions.TAKETWO));
-        // - C++ block card
-        cppPowerCards.add(new PowerCard(ProgrammingLanguage.CPPLAN, "../Assets/cpp/powerCards/cpp_taketwo_card.png", PowerOptions.BLOCK));
+        deck = new ArrayList<>(); 
 
-        // C#
-        // --- C# number cards
-        for(int i = 0; i < 10; i++)
-        {
-            csharpNumberCards.add(new NumberCard(ProgrammingLanguage.CSHARPLAN, "../Assets/csharp/numberCards/csharp_" + i + "_card.png", i));
-        }
-        // --- C# power cards
-        // - C# base card
-        csharpPowerCards.add(new PowerCard(ProgrammingLanguage.CSHARPLAN, "../Assets/csharp/powerCards/csharp_base_card.png", PowerOptions.BASECARD));
-        // - C# take two card
-        csharpPowerCards.add(new PowerCard(ProgrammingLanguage.CSHARPLAN, "../Assets/csharp/powerCards/csharp_block_card.png", PowerOptions.TAKETWO));
-        // - C# block card
-        csharpPowerCards.add(new PowerCard(ProgrammingLanguage.CSHARPLAN, "../Assets/csharp/powerCards/csharp_taketwo_card.png", PowerOptions.BLOCK));
-
-        // Java
-        // --- Java number cards
-        for(int i = 0; i < 10; i++)
-        {
-            javaNumberCards.add(new NumberCard(ProgrammingLanguage.JAVALAN, "../Assets/java/numberCards/java_" + i + "_card.png", i));
-        }
-        // --- Java power cards
-        // - Java base card
-        javaPowerCards.add(new PowerCard(ProgrammingLanguage.JAVALAN, "../Assets/java/powerCards/java_base_card.png", PowerOptions.BASECARD));
-        // - Java take two card
-        javaPowerCards.add(new PowerCard(ProgrammingLanguage.JAVALAN, "../Assets/java/powerCards/java_block_card.png", PowerOptions.TAKETWO));
-        // - Java block card
-        javaPowerCards.add(new PowerCard(ProgrammingLanguage.JAVALAN, "../Assets/java/powerCards/java_taketwo_card.png", PowerOptions.BLOCK));
-
-        // Python
-        // --- Python number cards
-        for(int i = 0; i < 10; i++)
-        {
-            pythonNumberCards.add(new NumberCard(ProgrammingLanguage.PYTHONLAN, "../Assets/python/numberCards/python_" + i + "_card.png", i));
-        }
-        // --- Python power cards
-        // - Python base card
-        pythonPowerCards.add(new PowerCard(ProgrammingLanguage.PYTHONLAN, "../Assets/python/powerCards/python_base_card.png", PowerOptions.BASECARD));
-        // - Python take two card
-        pythonPowerCards.add(new PowerCard(ProgrammingLanguage.PYTHONLAN, "../Assets/python/powerCards/python_block_card.png", PowerOptions.TAKETWO));
-        // - C++ block card
-        pythonPowerCards.add(new PowerCard(ProgrammingLanguage.PYTHONLAN, "../Assets/python/powerCards/python_taketwo_card.png", PowerOptions.BLOCK));
-
-        // Deck
-        deck.add(cppDeck);
-        deck.add(csharpDeck);
-        deck.add(javaDeck);
-        deck.add(pythonDeck);
+        deck.add(createLanguageDeck(ProgrammingLanguage.CPPLAN, "cpp"));
+        deck.add(createLanguageDeck(ProgrammingLanguage.CSHARPLAN, "csharp"));
+        deck.add(createLanguageDeck(ProgrammingLanguage.JAVALAN, "java"));
+        deck.add(createLanguageDeck(ProgrammingLanguage.PYTHONLAN, "python"));
     }
 
-    public ArrayList<ArrayList<ArrayList<Card>>> getDeck()
+    private ArrayList<ArrayList<Card>> createLanguageDeck(ProgrammingLanguage language, String languageName) 
+    {
+        ArrayList<ArrayList<Card>> languageDeck = new ArrayList<>();
+
+        // --- Number Cards
+        ArrayList<Card> numberCards = new ArrayList<>();
+        for (byte i = 0; i < 10; i++) 
+        {
+            numberCards.add(new NumberCard(language, "../Assets/" + languageName + "/numberCards/" + languageName + "_" + i + "_card.png", i));
+        }
+
+        // --- Power Cards
+        ArrayList<Card> powerCards = new ArrayList<>();
+        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_base_card.png", PowerOptions.BASECARD));
+        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_block_card.png", PowerOptions.BLOCK));
+        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_taketwo_card.png", PowerOptions.TAKETWO));
+
+        languageDeck.add(numberCards);
+        languageDeck.add(powerCards);
+
+        return languageDeck;
+    }
+
+    public ArrayList<ArrayList<ArrayList<Card>>> getDeck() 
     {
         return deck;
     }
-} 
+
+    public void printDeck() 
+    {
+        for (byte i = 0; i < deck.size(); i++) 
+        {
+            ArrayList<ArrayList<Card>> currentLanguageDeck = deck.get(i);
+
+            System.out.print("\n\n----- " + currentLanguageDeck.get(0).get(0).getLanguage() + " -----");
+            System.out.println("\n--- Number Cards");
+            ArrayList<Card> currentNumberCards = currentLanguageDeck.get(0);
+            for (Card card : currentNumberCards) 
+            {
+                NumberCard numberCard = (NumberCard) card;
+
+                System.out.println("Language: " + numberCard.getLanguage());
+                System.out.println("Url: " + numberCard.getAssetUrl());
+                System.out.println("Number: " + numberCard.getNumber());
+            }
+
+            System.out.println("\n--- Power Cards");
+            ArrayList<Card> currentPowerCards = currentLanguageDeck.get(1);
+            for (Card card : currentPowerCards) 
+            {
+                PowerCard powerCard = (PowerCard) card;
+
+                System.out.println("Language: " + powerCard.getLanguage());
+                System.out.println("Url: " + powerCard.getAssetUrl());
+                System.out.println("Power: " + powerCard.getPower());
+            }
+        }
+    }
+}
+
