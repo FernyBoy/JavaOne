@@ -153,11 +153,11 @@ public class TableFrame extends JFrame
             {
                 public void mouseEntered(java.awt.event.MouseEvent evt)
                 {
-                    cardUp(evt, card);
+                    cardUp(card);
                 }
                 public void mouseExited(java.awt.event.MouseEvent evt)
                 {
-                    cardDown(evt, card);
+                    cardDown(card);
                 }
             });
         }
@@ -205,11 +205,11 @@ public class TableFrame extends JFrame
     }
 
     // ----- Listeners -----
-    private void cardUp(java.awt.event.MouseEvent evt, JLabel card)
+    private void cardUp(JLabel card)
     {
         card.setBounds(card.getX(), (card.getY() - (int)(cardsWidth / 2.0)), cardsWidth, (cardsHeight + (int)(cardsWidth / 2.0)));
     }
-    private void cardDown(java.awt.event.MouseEvent evt, JLabel card)
+    private void cardDown(JLabel card)
     {
         card.setBounds(card.getX(), (card.getY() + (int)(cardsWidth / 2.0)), cardsWidth, cardsHeight);
     }

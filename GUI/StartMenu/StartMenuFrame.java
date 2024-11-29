@@ -4,6 +4,7 @@ package GUI.StartMenu;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import javax.swing.*;
 
 
@@ -25,21 +26,19 @@ public class StartMenuFrame extends JFrame
     private int backButtonWidth = (int) (screenWidth * 0.09375);
     private int backButtonHeight = (int) (backButtonWidth * (7.0 / 9.0));
 
+    // Arrays de botones
+    private ArrayList<JLabel> buttonsList = new ArrayList<>();
+    private ArrayList<JLabel> buttonsHoverList = new ArrayList<>();
+
     // Background
     private ImageIcon backgroundAsset;
     private JLabel background;
 
-    // Make party
-    private ImageIcon makePartyButtonAsset;
-    private JLabel makePartyButton;
-    private ImageIcon makePartyButtonHoverAsset;
-    private JLabel makePartyButtonHover;
-
-    // Join party
-    private ImageIcon joinPartyButtonAsset;
-    private JLabel joinPartyButton;
-    private ImageIcon joinPartyButtonHoverAsset;
-    private JLabel joinPartyButtonHover;
+    // Credits
+    private ImageIcon creditsButtonAsset;
+    private JLabel creditsButton;
+    private ImageIcon creditsButtonHoverAsset;
+    private JLabel creditsButtonHover;
 
     // Instructions
     private ImageIcon instructionButtonAsset;
@@ -47,11 +46,17 @@ public class StartMenuFrame extends JFrame
     private ImageIcon instructionButtonHoverAsset;
     private JLabel instructionButtonHover;
 
-    // Credits
-    private ImageIcon creditsButtonAsset;
-    private JLabel creditsButton;
-    private ImageIcon creditsButtonHoverAsset;
-    private JLabel creditsButtonHover;
+    // Join party
+    private ImageIcon joinPartyButtonAsset;
+    private JLabel joinPartyButton;
+    private ImageIcon joinPartyButtonHoverAsset;
+    private JLabel joinPartyButtonHover;
+
+    // Make party
+    private ImageIcon makePartyButtonAsset;
+    private JLabel makePartyButton;
+    private ImageIcon makePartyButtonHoverAsset;
+    private JLabel makePartyButtonHover;
 
     // Exit
     private ImageIcon exitButtonAsset;
@@ -105,28 +110,36 @@ public class StartMenuFrame extends JFrame
 
     private void createButtonsAndBackground()
     {
-        // Background
-        background = new JLabel(backgroundAsset);
-
-        // Make party
-        makePartyButton = new JLabel(makePartyButtonAsset);
-        makePartyButtonHover = new JLabel(makePartyButtonHoverAsset);
-
-        // Join party
-        joinPartyButton = new JLabel(joinPartyButtonAsset);
-        joinPartyButtonHover = new JLabel(joinPartyButtonHoverAsset);
-
-        // Instructions
-        instructionButton = new JLabel(instructionButtonAsset);
-        instructionButtonHover = new JLabel(instructionButtonHoverAsset);
-
-        // Credits
-        creditsButton = new JLabel(creditsButtonAsset);
-        creditsButtonHover = new JLabel(creditsButtonHoverAsset);
-
         // Exit
         exitButton = new JLabel(exitButtonAsset);
         exitButtonHover = new JLabel(exitButtonHoverAsset);
+        
+        // Credits
+        creditsButton = new JLabel(creditsButtonAsset);
+        buttonsList.add(creditsButton);
+        creditsButtonHover = new JLabel(creditsButtonHoverAsset);
+        buttonsHoverList.add(creditsButtonHover);
+        
+        // Instructions
+        instructionButton = new JLabel(instructionButtonAsset);
+        buttonsList.add(instructionButton);
+        instructionButtonHover = new JLabel(instructionButtonHoverAsset);
+        buttonsHoverList.add(instructionButtonHover);
+        
+        // Join party
+        joinPartyButton = new JLabel(joinPartyButtonAsset);
+        buttonsList.add(joinPartyButton);
+        joinPartyButtonHover = new JLabel(joinPartyButtonHoverAsset);
+        buttonsHoverList.add(joinPartyButtonHover);
+        
+        // Make party
+        makePartyButton = new JLabel(makePartyButtonAsset);
+        buttonsList.add(makePartyButton);
+        makePartyButtonHover = new JLabel(makePartyButtonHoverAsset);
+        buttonsHoverList.add(makePartyButtonHover);
+        
+        // Background
+        background = new JLabel(backgroundAsset);
     }
 
     private void setButtonAndBackgroundPosition()
@@ -134,44 +147,115 @@ public class StartMenuFrame extends JFrame
         int middleScreen = (int) ((screenWidth - buttonWidth) / 2.0);
         int buttonYPostion = (int) (screenHeight - buttonHeight - (buttonHeight / 2.0));
 
+        // Exit position
+        exitButton.setBounds((int) (screenWidth - backButtonWidth), 0, backButtonWidth, backButtonHeight);
+        exitButtonHover.setBounds((int) (screenWidth - backButtonWidth), 0, backButtonWidth, backButtonHeight);
+
         // Credits position
         creditsButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
+        creditsButtonHover.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
 
-        
         // Instructions position
         buttonYPostion -= (int) (buttonHeight + (buttonHeight / 2.0));
         instructionButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
-
+        instructionButtonHover.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
         
         // Join party position
         buttonYPostion -= (int) (buttonHeight + (buttonHeight / 2.0));
         joinPartyButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
+        joinPartyButtonHover.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
 
-        
         // Make party position
         buttonYPostion -= (int) (buttonHeight + (buttonHeight / 2.0));
         makePartyButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
+        makePartyButtonHover.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
         
         // Background position
         background.setBounds(0, 0, screenWidth, screenHeight);
+    }
 
-        // Exit position
-        exitButton.setBounds((int) (screenWidth - backButtonWidth), 0, backButtonWidth, backButtonHeight);
+    private void addListeners()
+    {
+        exitButton.addMouseListener(new java.awt.event.MouseAdapter() 
+        {
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
+               buttonHoverOn(exitButton, exitButtonHover);
+            }
+        });
+        
+        exitButtonHover.addMouseListener(new java.awt.event.MouseAdapter() 
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                closeGame();
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
+               buttonHoverOff(exitButton, exitButtonHover);
+            }
+        });
+
+        for(JLabel button : buttonsList)
+        {
+            button.addMouseListener(new java.awt.event.MouseAdapter() 
+            {
+                public void mouseEntered(java.awt.event.MouseEvent evt)
+                {
+                   buttonHoverOn(button, buttonsHoverList.get(buttonsList.indexOf(button)));
+                }
+            });
+        }
+
+        for(JLabel hover : buttonsHoverList)
+        {
+            hover.addMouseListener(new java.awt.event.MouseAdapter() 
+            {
+                public void mouseClicked(java.awt.event.MouseEvent evt)
+                {
+                    closeGame();
+                }
+                public void mouseExited(java.awt.event.MouseEvent evt)
+                {
+                   buttonHoverOff(buttonsList.get(buttonsHoverList.indexOf(hover)), hover);
+                }
+            });
+        }
     }
 
     private void addButtons()
     {
+        // add(exitButtonHover);
+
         add(exitButton);
 
-        add(creditsButton);
-
-        add(instructionButton);
-
-        add(joinPartyButton);
-
-        add(makePartyButton);
+        for(JLabel button : buttonsList)
+        {
+            add(button);
+        }
 
         add(background);
+    }
+
+    // Listeners
+    public void closeGame()
+    {
+        System.exit(0);
+    }
+
+    public void buttonHoverOn(JLabel button, JLabel hover)
+    {
+        remove(button);
+        add(hover);
+        getContentPane().setComponentZOrder(hover, 0);
+        repaint();
+    }
+    public void buttonHoverOff(JLabel button, JLabel hover)
+    {
+        remove(hover);
+        add(button);
+        getContentPane().setComponentZOrder(button, 0);
+        repaint();
     }
 
     public StartMenuFrame()
@@ -190,6 +274,7 @@ public class StartMenuFrame extends JFrame
         createAssets();
         createButtonsAndBackground();
         setButtonAndBackgroundPosition();
+        addListeners();
         addButtons();
     }
 
