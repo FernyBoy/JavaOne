@@ -1,3 +1,5 @@
+package GUI.StartMenu;
+
 // Java awt
 import java.awt.Dimension;
 import java.awt.Image;
@@ -14,6 +16,14 @@ public class StartMenuFrame extends JFrame
     // Obtenemos las medidas de nuestra pantalla
     private int screenWidth = (int) screenSize.getWidth();
     private int screenHeight = (int) screenSize.getHeight();
+
+    // Definimos el tamanio de los botones
+    private int buttonWidth = (int) (screenWidth * 0.2082);
+    private int buttonHeight = (int) (buttonWidth * (1.0/5.0));
+
+    // Tamanio de los botones
+    private int backButtonWidth = (int) (screenWidth * 0.09375);
+    private int backButtonHeight = (int) (backButtonWidth * (7.0 / 9.0));
 
     // Background
     private ImageIcon backgroundAsset;
@@ -54,38 +64,38 @@ public class StartMenuFrame extends JFrame
         try
         {
             // Background
-            ImageIcon backgroundIcon = new ImageIcon("./Assets/menu_background.png");
+            ImageIcon backgroundIcon = new ImageIcon("./GUI/StartMenu/Assets/menu_background.png");
             backgroundAsset = new ImageIcon(backgroundIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
 
             // Make party
-            ImageIcon makePartyIcon = new ImageIcon("./Assets/makeParty_button.png");
-            makePartyButtonAsset = new ImageIcon(makePartyIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
-            ImageIcon makePartyHoverIcon = new ImageIcon("./Assets/makeParty_button_hover.png");
-            makePartyButtonHoverAsset = new ImageIcon(makePartyHoverIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
+            ImageIcon makePartyIcon = new ImageIcon("./GUI/StartMenu/Assets/makeParty_button.png");
+            makePartyButtonAsset = new ImageIcon(makePartyIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
+            ImageIcon makePartyHoverIcon = new ImageIcon("./GUI/StartMenu/Assets/makeParty_button_hover.png");
+            makePartyButtonHoverAsset = new ImageIcon(makePartyHoverIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
 
             // Join party
-            ImageIcon joinPartyIcon = new ImageIcon("./Assets/joinParty_button.png");
-            joinPartyButtonAsset = new ImageIcon(joinPartyIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
-            ImageIcon joinPartyHoverIcon = new ImageIcon("./Assets/joinParty_button_hover.png");
-            joinPartyButtonHoverAsset = new ImageIcon(joinPartyHoverIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
+            ImageIcon joinPartyIcon = new ImageIcon("./GUI/StartMenu/Assets/joinParty_button.png");
+            joinPartyButtonAsset = new ImageIcon(joinPartyIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
+            ImageIcon joinPartyHoverIcon = new ImageIcon("./GUI/StartMenu/Assets/joinParty_button_hover.png");
+            joinPartyButtonHoverAsset = new ImageIcon(joinPartyHoverIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
 
             // Instruction
-            ImageIcon instructionIcon = new ImageIcon("./Assets/instruction_button.png");
-            instructionButtonAsset = new ImageIcon(instructionIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
-            ImageIcon instructionHoverIcon = new ImageIcon("./Assets/instruction_button_hover.png");
-            instructionButtonHoverAsset = new ImageIcon(instructionHoverIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
+            ImageIcon instructionIcon = new ImageIcon("./GUI/StartMenu/Assets/instruction_button.png");
+            instructionButtonAsset = new ImageIcon(instructionIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
+            ImageIcon instructionHoverIcon = new ImageIcon("./GUI/StartMenu/Assets/instruction_button_hover.png");
+            instructionButtonHoverAsset = new ImageIcon(instructionHoverIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
 
             // Credits
-            ImageIcon creditsIcon = new ImageIcon("./Assets/credits_button.png");
-            creditsButtonAsset = new ImageIcon(creditsIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
-            ImageIcon creditsHoverIcon = new ImageIcon("./Assets/credits_button_hover.png");
-            creditsButtonHoverAsset = new ImageIcon(creditsHoverIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
+            ImageIcon creditsIcon = new ImageIcon("./GUI/StartMenu/Assets/credits_button.png");
+            creditsButtonAsset = new ImageIcon(creditsIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
+            ImageIcon creditsHoverIcon = new ImageIcon("./GUI/StartMenu/Assets/credits_button_hover.png");
+            creditsButtonHoverAsset = new ImageIcon(creditsHoverIcon.getImage().getScaledInstance(buttonWidth, buttonHeight, Image.SCALE_SMOOTH));
 
             // Exit
-            ImageIcon exitIcon = new ImageIcon("./Assets/exit_button.png");
-            exitButtonAsset = new ImageIcon(exitIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
-            ImageIcon exitHoverIcon = new ImageIcon("./Assets/exit_button_hover.png");
-            exitButtonHoverAsset = new ImageIcon(exitHoverIcon.getImage().getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH));
+            ImageIcon exitIcon = new ImageIcon("./GUI/StartMenu/Assets/exit_button.png");
+            exitButtonAsset = new ImageIcon(exitIcon.getImage().getScaledInstance(backButtonWidth, backButtonHeight, Image.SCALE_SMOOTH));
+            ImageIcon exitHoverIcon = new ImageIcon("./GUI/StartMenu/Assets/exit_button_hover.png");
+            exitButtonHoverAsset = new ImageIcon(exitHoverIcon.getImage().getScaledInstance(backButtonWidth, backButtonHeight, Image.SCALE_SMOOTH));
         }
         catch (Exception e)
         {
@@ -121,23 +131,32 @@ public class StartMenuFrame extends JFrame
 
     private void setButtonAndBackgroundPosition()
     {
+        int middleScreen = (int) ((screenWidth - buttonWidth) / 2.0);
+        int buttonYPostion = (int) (screenHeight - buttonHeight - (buttonHeight / 2.0));
+
+        // Credits position
+        creditsButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
+
+        
+        // Instructions position
+        buttonYPostion -= (int) (buttonHeight + (buttonHeight / 2.0));
+        instructionButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
+
+        
+        // Join party position
+        buttonYPostion -= (int) (buttonHeight + (buttonHeight / 2.0));
+        joinPartyButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
+
+        
+        // Make party position
+        buttonYPostion -= (int) (buttonHeight + (buttonHeight / 2.0));
+        makePartyButton.setBounds(middleScreen, buttonYPostion, buttonWidth, buttonHeight);
+        
         // Background position
         background.setBounds(0, 0, screenWidth, screenHeight);
 
-        // Make party position
-        makePartyButton.setBounds(0, 0, screenWidth, screenHeight);
-
-        // Join party position
-        joinPartyButton.setBounds(0, 0, screenWidth, screenHeight);
-
-        // Instructions position
-        instructionButton.setBounds(0, 0, screenWidth, screenHeight);
-
-        // Credits position
-        creditsButton.setBounds(0, 0, screenWidth, screenHeight);
-
         // Exit position
-        exitButton.setBounds(0, 0, screenWidth, screenHeight);
+        exitButton.setBounds((int) (screenWidth - backButtonWidth), 0, backButtonWidth, backButtonHeight);
     }
 
     private void addButtons()
