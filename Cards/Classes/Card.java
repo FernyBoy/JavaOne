@@ -1,11 +1,12 @@
 package Cards.Classes;
 
-import Cards.Enums.ProgrammingLanguage;
+import Cards.Enums.*;
 
 public abstract class Card
 {
     protected ProgrammingLanguage language;
     protected String imageAsset;
+    protected TypeOptions type;
 
     public ProgrammingLanguage getLanguage()
     {
@@ -15,5 +16,10 @@ public abstract class Card
     public String getAssetUrl()
     {
         return imageAsset;
+    }
+
+    public TypeOptions getType()
+    {
+        return type;
     }
 }

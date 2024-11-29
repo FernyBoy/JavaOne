@@ -30,14 +30,14 @@ public class Deck
         ArrayList<Card> numberCards = new ArrayList<>();
         for (byte i = 0; i < 10; i++) 
         {
-            numberCards.add(new NumberCard(language, "../Assets/" + languageName + "/numberCards/" + languageName + "_" + i + "_card.png", i));
+            numberCards.add(new NumberCard(language, "../Assets/" + languageName + "/numberCards/" + languageName + "_" + i + "_card.png", TypeOptions.NUMBER, i));
         }
 
         // --- Power Cards
         ArrayList<Card> powerCards = new ArrayList<>();
-        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_base_card.png", PowerOptions.BASECARD));
-        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_block_card.png", PowerOptions.BLOCK));
-        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_taketwo_card.png", PowerOptions.TAKETWO));
+        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_base_card.png", TypeOptions.POWER, PowerOptions.BASECARD));
+        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_block_card.png", TypeOptions.POWER, PowerOptions.BLOCK));
+        powerCards.add(new PowerCard(language, "../Assets/" + languageName + "/powerCards/" + languageName + "_taketwo_card.png", TypeOptions.POWER, PowerOptions.TAKETWO));
 
         languageDeck.add(numberCards);
         languageDeck.add(powerCards);

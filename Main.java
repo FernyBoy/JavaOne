@@ -1,10 +1,10 @@
-import Cards.Classes.Deck;
+import Game.Classes.CreateDeck;
 
 public class Main 
 {
-    static Deck deckClass = new Deck();
+    static CreateDeck deck = new CreateDeck();
     public static void main(String[] args) 
     {
-        deckClass.printDeck();   
+        deck.printDeck();
     }    
 }

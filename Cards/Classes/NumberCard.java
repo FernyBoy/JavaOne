@@ -1,15 +1,16 @@
 package Cards.Classes;
 
-import Cards.Enums.ProgrammingLanguage;
+import Cards.Enums.*;
 
 public class NumberCard extends Card
 {
     protected byte number;
     
-    public NumberCard(ProgrammingLanguage language, String url, byte number)
+    public NumberCard(ProgrammingLanguage language, String url, TypeOptions type, byte number)
     {
         this.language = language;
         this.imageAsset = url;
+        this.type = type;
         this.number = number;
     }
 
