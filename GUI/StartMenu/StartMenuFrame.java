@@ -211,10 +211,6 @@ public class StartMenuFrame extends JFrame
         {
             hover.addMouseListener(new java.awt.event.MouseAdapter() 
             {
-                public void mouseClicked(java.awt.event.MouseEvent evt)
-                {
-                    closeGame();
-                }
                 public void mouseExited(java.awt.event.MouseEvent evt)
                 {
                    buttonHoverOff(buttonsList.get(buttonsHoverList.indexOf(hover)), hover);
