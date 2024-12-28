@@ -4,7 +4,6 @@ import java.awt.Toolkit;
 import java.awt.Dimension;
 
 import GUI.StartMenu.StartMenuPanel;
-import Game.Classes.CreateDeck;
 
 public class Main 
 {
@@ -13,7 +12,6 @@ public class Main
     static int screenWidth = (int) screen.getWidth();
     static int screenHeight = (int) screen.getHeight();
 
-    static CreateDeck deck = new CreateDeck();
     public static void main(String[] args) 
     {
         JFrame start = new JFrame();
